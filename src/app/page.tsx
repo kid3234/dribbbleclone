@@ -1,10 +1,10 @@
-"use client"
+"use client";
 import Navbar from "@/components/Navbar/page";
 import { useState,useEffect} from "react";
 
 export default function Home() {
   const [isAtMiddle, setIsAtMiddle] = useState(false);
-  
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
