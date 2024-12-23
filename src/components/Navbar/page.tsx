@@ -22,26 +22,22 @@ const Navbar: React.FC<myprops> = ({ isAtMiddle }) => {
   );
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 1000px)");
-
-    const handleResize = () => {
-      console.log("showmenu", showmenu);
-
-      setShowmenu(false);
-
-      console.log("showmenu 2", showmenu);
-
-      console.log("showmenu 2", showmenu);
-
-      setIsLargeScreen(mediaQuery.matches);
-    };
-
-    // Add listener
-    mediaQuery.addEventListener("change", handleResize);
-
-    // Cleanup listener on unmount
-    return () => mediaQuery.removeEventListener("change", handleResize);
+    if (typeof window !== "undefined") {
+      const mediaQuery = window.matchMedia("(min-width: 1000px)");
+  
+      const handleResize = () => {
+        setShowmenu(false);
+        setIsLargeScreen(mediaQuery.matches);
+      };
+  
+      // Add listener
+      mediaQuery.addEventListener("change", handleResize);
+  
+      // Cleanup listener on unmount
+      return () => mediaQuery.removeEventListener("change", handleResize);
+    }
   }, []);
+  
 
   const openShowmenu = () => {
     setShowmenu(true); // Toggle state

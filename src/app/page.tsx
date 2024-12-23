@@ -6,23 +6,26 @@ export default function Home() {
   const [isAtMiddle, setIsAtMiddle] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      if (scrollPosition >= 300 && !isAtMiddle) {
-        setIsAtMiddle(true);
-      } else if (scrollPosition < 300 && isAtMiddle) {
-        setIsAtMiddle(false);
-      }
-    };
-
-    // Attach the scroll event listener
-    window.addEventListener("scroll", handleScroll);
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    if (typeof window !== "undefined") {
+      const handleScroll = () => {
+        const scrollPosition = window.scrollY;
+        if (scrollPosition >= 300 && !isAtMiddle) {
+          setIsAtMiddle(true);
+        } else if (scrollPosition < 300 && isAtMiddle) {
+          setIsAtMiddle(false);
+        }
+      };
+  
+      // Attach the scroll event listener
+      window.addEventListener("scroll", handleScroll);
+  
+      // Cleanup the event listener on component unmount
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
   }, [isAtMiddle]);
+  
   return (
     <div className="w-full min-h-screen  font-[family-name:var(--font-geist-sans)]">
       <Navbar isAtMiddle={isAtMiddle}/>
