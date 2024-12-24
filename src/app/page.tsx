@@ -44,6 +44,7 @@ export default function Home() {
           to take on your next project
         </p>
         <Search show={show} toggleShow={toggleShow} />
+        
         <div className="w-full flex flex-col gap-4 items-center">
           <p className="text-sm text-gray-400">Trending searches</p>
           <div className="flex flex-wrap gap-4 ">
