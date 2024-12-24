@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@iconify/react": "^5.1.0",
+    "@next/font": "^14.2.15",
     "axios": "^1.7.9",
     "next": "15.1.1",
     "react": "^19.0.0",
