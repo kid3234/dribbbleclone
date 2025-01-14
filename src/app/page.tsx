@@ -6,10 +6,20 @@ import CircularCarousel from "@/components/CircularCarousel/page";
 import { Icon } from "@iconify/react";
 import { useState, useEffect, useRef } from "react";
 
+interface ItemType {
+  image: string; // Adjust based on the actual properties in your data
+  profile?: string;
+  project?:string;
+  seen:number;
+  like:number
+
+  // Add more properties as needed
+}
+
 export default function Home() {
   const [isAtMiddle, setIsAtMiddle] = useState(false);
   const [show, setShow] = useState(false);
-  const scrollContainer = useRef(null);
+  const scrollContainer = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
 
@@ -19,7 +29,7 @@ export default function Home() {
     { content: "Card 3" },
     { content: "Card 4" },
   ];
-  const data = [
+const data: ItemType[]= [
     {
       image: "/image/image.png",
       project: "Project name",
@@ -155,21 +165,44 @@ export default function Home() {
     },
   ];
 
+  // const checkArrows = () => {
+  //   const { scrollLeft, scrollWidth, clientWidth } = scrollContainer.current;
+  //   setShowLeftArrow(scrollLeft > 0);
+  //   setShowRightArrow(scrollLeft + clientWidth < scrollWidth);
+  // };
+
+  // const scroll = (direction: "left" | "right") => {
+  //   const scrollAmount = 100; // Adjust scroll amount as needed
+
+  //   scrollContainer.current.scrollBy({
+  //     left: direction === "left" ? -scrollAmount : scrollAmount,
+  //     behavior: "smooth",
+  //   });
+  //   setTimeout(checkArrows, 300); // Check arrows after scrolling
+  // };
+
   const checkArrows = () => {
-    const { scrollLeft, scrollWidth, clientWidth } = scrollContainer.current;
-    setShowLeftArrow(scrollLeft > 0);
-    setShowRightArrow(scrollLeft + clientWidth < scrollWidth);
+    if (scrollContainer.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainer.current;
+      setShowLeftArrow(scrollLeft > 0);
+      setShowRightArrow(scrollLeft + clientWidth < scrollWidth);
+    }
   };
 
-  const scroll = (direction: any) => {
+
+
+  const scroll = (direction: "left" | "right") => {
     const scrollAmount = 100; // Adjust scroll amount as needed
-
-    scrollContainer.current.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth",
-    });
-    setTimeout(checkArrows, 300); // Check arrows after scrolling
+  
+    if (scrollContainer.current) {
+      scrollContainer.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+      setTimeout(checkArrows, 300); // Check arrows after scrolling
+    }
   };
+  
 
   const toggleShow = () => {
     setShow((prev) => !prev);
@@ -279,7 +312,7 @@ export default function Home() {
           </div>
         </div>
         <div className="w-full m-auto gap-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {data.map((item: any) => (
+          {data.map((item: ItemType) => (
             <Card data={item} key={item?.image} />
           ))}
         </div>
