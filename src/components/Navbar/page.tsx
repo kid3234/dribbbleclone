@@ -9,20 +9,92 @@ interface myprops {
 }
 
 const Navbar: React.FC<myprops> = ({ isAtMiddle }) => {
+  // const [showExplore, setShowExplore] = useState(false);
+  // const [showHiredesiner, setShowHiredesiner] = useState(false);
+
+  // const [showExplorelarge, setShowExplorelarge] = useState(false);
+  // const [showHiredesinerlarge, setShowHiredesinerlarge] = useState(false);
+  // const [show, setShow] = useState(false);
+  // const [showmenu, setShowmenu] = useState(false);
+  // const [showSearch, setShowSearch] = useState(false);
+
+  // const [isLargeScreen, setIsLargeScreen] = useState(
+  //   window.matchMedia("(min-width: 1000px)").matches
+  // );
+
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const mediaQuery = window.matchMedia("(min-width: 1000px)");
+
+  //     const handleResize = () => {
+  //       setShowmenu(false);
+  //       setIsLargeScreen(mediaQuery.matches);
+  //     };
+
+  //     // Add listener
+  //     mediaQuery.addEventListener("change", handleResize);
+
+  //     // Cleanup listener on unmount
+  //     return () => mediaQuery.removeEventListener("change", handleResize);
+  //   }
+  // }, []);
+
+  // const openShowmenu = () => {
+  //   setShowmenu(true); // Toggle state
+  //   setShowSearch(false);
+  // };
+
+  // const closeShowmenu = () => {
+  //   setShowmenu(false); // Toggle state
+  // };
+
+  // const openShowExplore = () => {
+  //   console.log("hi");
+
+  //   setShowExplorelarge(true);
+  //   setShowHiredesinerlarge(false);
+  // };
+
+  // const toggleShowSearch = () => {
+  //   setShowSearch((prev) => !prev);
+  // };
+
+  // const toggleShowExplore = () => {
+  //   setShowExplore((prev) => !prev);
+  // };
+
+  // const toggleShow = () => {
+  //   setShow((prev) => !prev);
+  // };
+
+  // const toggleShowHiredesiner = () => {
+  //   setShowHiredesiner((prev) => !prev);
+  // };
+  // const closeShowExplore = () => {
+  //   setShowExplorelarge(false); // Toggle state
+  // };
+
+  // const openShowHiredesiner = () => {
+  //   // Toggle state
+  //   setShowHiredesinerlarge(true);
+  // };
+
+  // const closeShowHiredesiner = () => {
+  //   setShowHiredesinerlarge(false); // Toggle state
+  // };
+
+
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
   const [showExplore, setShowExplore] = useState(false);
   const [showHiredesiner, setShowHiredesiner] = useState(false);
-
   const [showExplorelarge, setShowExplorelarge] = useState(false);
   const [showHiredesinerlarge, setShowHiredesinerlarge] = useState(false);
-  const [show, setShow] = useState(false);
   const [showmenu, setShowmenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-
-  const [isLargeScreen, setIsLargeScreen] = useState(
-    window.matchMedia("(min-width: 1000px)").matches
-  );
+   const [show, setShow] = useState(false);
 
   useEffect(() => {
+    // Check if window is defined (client-side)
     if (typeof window !== "undefined") {
       const mediaQuery = window.matchMedia("(min-width: 1000px)");
 
@@ -30,6 +102,9 @@ const Navbar: React.FC<myprops> = ({ isAtMiddle }) => {
         setShowmenu(false);
         setIsLargeScreen(mediaQuery.matches);
       };
+
+      // Set initial value
+      setIsLargeScreen(mediaQuery.matches);
 
       // Add listener
       mediaQuery.addEventListener("change", handleResize);
@@ -40,17 +115,19 @@ const Navbar: React.FC<myprops> = ({ isAtMiddle }) => {
   }, []);
 
   const openShowmenu = () => {
-    setShowmenu(true); // Toggle state
+    setShowmenu(true);
     setShowSearch(false);
   };
 
+    const toggleShow = () => {
+    setShow((prev) => !prev);
+  };
+
   const closeShowmenu = () => {
-    setShowmenu(false); // Toggle state
+    setShowmenu(false);
   };
 
   const openShowExplore = () => {
-    console.log("hi");
-
     setShowExplorelarge(true);
     setShowHiredesinerlarge(false);
   };
@@ -63,24 +140,20 @@ const Navbar: React.FC<myprops> = ({ isAtMiddle }) => {
     setShowExplore((prev) => !prev);
   };
 
-  const toggleShow = () => {
-    setShow((prev) => !prev);
-  };
-
   const toggleShowHiredesiner = () => {
     setShowHiredesiner((prev) => !prev);
   };
+
   const closeShowExplore = () => {
-    setShowExplorelarge(false); // Toggle state
+    setShowExplorelarge(false);
   };
 
   const openShowHiredesiner = () => {
-    // Toggle state
     setShowHiredesinerlarge(true);
   };
 
   const closeShowHiredesiner = () => {
-    setShowHiredesinerlarge(false); // Toggle state
+    setShowHiredesinerlarge(false);
   };
 
   return (
